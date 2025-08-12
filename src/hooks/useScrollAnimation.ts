@@ -16,7 +16,7 @@ export const useScrollAnimation = () => {
     });
 
     // Observe all elements with animation classes
-    const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-fade-in-right');
+    const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-fade-in-right, .animate-scale-in, .animate-rotate-in');
     animatedElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();

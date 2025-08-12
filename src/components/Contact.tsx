@@ -33,14 +33,27 @@ const Contact = () => {
     {
       icon: <Github className="w-6 h-6" />,
       label: "GitHub", 
-      href: "#",
+      href: "https://github.com/pravinabdulkalam6",
       color: "hover:text-gray-400"
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Message from ${data.name} - Portfolio Contact`);
+    const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
+    const mailtoLink = `mailto:pravinabdulkalam6@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -116,65 +129,49 @@ const Contact = () => {
             <div className="glow-card rounded-lg p-8 transition-all duration-300">
               <h3 className="text-2xl font-bold text-white dark:text-black mb-6">Send Message</h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
-                      placeholder="John"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
-                      placeholder="Doe"
-                      required
-                    />
-                  </div>
-                </div>
-
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div>
-                  <label className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
-                    placeholder="john@example.com"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
-                    Subject
+                  <label htmlFor="name" className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
+                    Full Name *
                   </label>
                   <input
                     type="text"
+                    id="name"
+                    name="name"
                     className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
-                    placeholder="Project Collaboration"
+                    placeholder="Enter your full name"
                     required
+                    aria-describedby="name-error"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
-                    Message
+                  <label htmlFor="email" className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
+                    placeholder="your.email@example.com"
+                    required
+                    aria-describedby="email-error"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
+                    Message *
                   </label>
                   <textarea
+                    id="message"
+                    name="message"
                     rows={6}
                     className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project..."
+                    placeholder="Tell me about your project, collaboration ideas, or any questions you have..."
                     required
+                    aria-describedby="message-error"
                   ></textarea>
                 </div>
 
