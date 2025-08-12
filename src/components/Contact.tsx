@@ -1,7 +1,13 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Linkedin, Github, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Linkedin, Github, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { submitContactForm, ContactFormData } from '../services/firebaseService';
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
@@ -38,23 +44,38 @@ const Contact = () => {
     }
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message')
-    };
-    
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Message from ${data.name} - Portfolio Contact`);
-    const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
-    const mailtoLink = `mailto:pravinabdulkalam6@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data: ContactFormData = {
+        name: formData.get('name') as string,
+        email: formData.get('email') as string,
+        message: formData.get('message') as string
+      };
+
+      await submitContactForm(data);
+      setSubmitStatus('success');
+      // Reset form data state instead of using form.reset()
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+
 
   return (
     <section id="contact" className="py-20 bg-gray-900/70 dark:bg-gray-100/80">
@@ -130,6 +151,23 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-white dark:text-black mb-6">Send Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <div className="flex items-center gap-2 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400">
+                    <CheckCircle className="w-5 h-5" />
+                    <span>Message sent successfully! I'll get back to you soon.</span>
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="flex items-center gap-2 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400">
+                    <AlertCircle className="w-5 h-5" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
+
+
                 <div>
                   <label htmlFor="name" className="block text-gray-300 dark:text-gray-700 text-sm font-medium mb-2">
                     Full Name *
@@ -138,6 +176,8 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
                     placeholder="Enter your full name"
                     required
@@ -153,6 +193,8 @@ const Contact = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
                     placeholder="your.email@example.com"
                     required
@@ -168,6 +210,8 @@ const Contact = () => {
                     id="message"
                     name="message"
                     rows={6}
+                    value={formData.message}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300 resize-none"
                     placeholder="Tell me about your project, collaboration ideas, or any questions you have..."
                     required
@@ -177,10 +221,20 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full magnetic-button px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-glow flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full magnetic-button px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-glow flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send size={18} />
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </div>
