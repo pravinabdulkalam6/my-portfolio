@@ -32,10 +32,22 @@ const Header = () => {
     { label: 'Contact', id: 'contact' }
   ];
 
+  const brandTitleClass = isScrolled
+    ? 'text-white dark:text-black'
+    : 'text-white dark:text-black';
+
+  const brandSubtitleClass = isScrolled
+    ? 'text-slate-200 dark:text-slate-700'
+    : 'text-slate-300 dark:text-slate-700';
+
+  const navTextClass = isScrolled
+    ? 'text-white dark:text-black'
+    : 'text-slate-200 dark:text-black';
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-gray-900/95 dark:bg-white/95 backdrop-blur-md border-b border-gray-800 dark:border-gray-200' 
+        ? 'bg-slate-950/78 dark:bg-white/97 backdrop-blur-2xl border-b border-cyan-300/20 dark:border-blue-300/55 shadow-[0_10px_30px_rgba(5,12,28,0.35)] dark:shadow-[0_10px_30px_rgba(40,96,170,0.16)]' 
         : 'bg-transparent'
     }`}>
       <nav className="container mx-auto px-6 py-3">
@@ -50,17 +62,17 @@ const Header = () => {
                 <img 
                   src="/images/logo.png" 
                   alt="Pravin Abdul Kalam M - Logo"
-                  className="h-16 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-2xl relative z-10"
+                  className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-2xl relative z-10"
                 />
                 <div className="absolute inset-0 bg-blue-500/20 dark:bg-gray-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </div>
               <div className="hidden sm:block text-left">
-                <h1 className="text-xl font-bold text-white dark:text-gray-900 leading-tight group-hover:text-blue-400 dark:group-hover:text-gray-700 transition-colors duration-300">
+                <h1 className={`text-lg md:text-xl font-bold leading-tight group-hover:text-cyan-300 dark:group-hover:text-gray-700 transition-colors duration-300 ${brandTitleClass}`}>
                   Pravin Abdul Kalam M
                 </h1>
                 <div className="flex items-center gap-2">
-                  <p className="text-xs text-gray-400 dark:text-gray-600 font-medium group-hover:text-gray-300 dark:group-hover:text-gray-500 transition-colors duration-300">
-                    Site Reliability & Data Engineer
+                  <p className={`text-[10px] md:text-xs leading-tight max-w-[15rem] md:max-w-none font-semibold group-hover:text-cyan-200 dark:group-hover:text-slate-600 transition-colors duration-300 ${brandSubtitleClass}`}>
+                    Site Reliability Engineer (SRE) | Security & Data Engineering
                   </p>
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" title="Available for opportunities"></div>
                 </div>
@@ -70,12 +82,16 @@ const Header = () => {
 
           {/* Desktop Navigation with Theme Toggle */}
           <div className="hidden md:flex items-center gap-6">
-            <ul className="flex space-x-8">
+            <ul className={`flex space-x-2 p-2 rounded-full border shadow-inner ${
+              isScrolled
+                ? 'bg-slate-900/60 dark:bg-white/95 border-slate-700/45 dark:border-blue-200'
+                : 'bg-slate-900/55 dark:bg-white/85 border-slate-700/45 dark:border-blue-200'
+            }`}>
               {navItems.map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className="text-gray-300 dark:text-gray-700 hover:text-blue-400 dark:hover:text-gray-800 transition-colors duration-300 relative group"
+                    className={`px-3 py-1.5 rounded-full hover:text-cyan-300 dark:hover:text-black hover:bg-cyan-400/10 dark:hover:bg-blue-100 transition-colors duration-300 relative group text-sm font-semibold ${navTextClass}`}
                   >
                     {item.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 dark:bg-gray-600 group-hover:w-full transition-all duration-300"></span>
@@ -91,7 +107,7 @@ const Header = () => {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white dark:text-gray-900 hover:text-blue-400 dark:hover:text-gray-700 transition-colors"
+              className={`${isScrolled ? 'text-white dark:text-black' : 'text-white dark:text-black'} hover:text-cyan-300 dark:hover:text-slate-700 transition-colors`}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -107,7 +123,7 @@ const Header = () => {
               <li key={item.id}>
                 <button
                   onClick={() => scrollToSection(item.id)}
-                  className="block text-gray-300 dark:text-gray-700 hover:text-blue-400 dark:hover:text-gray-800 transition-colors duration-300 w-full text-left"
+                  className={`block hover:text-cyan-300 dark:hover:text-slate-800 transition-colors duration-300 w-full text-left py-1 font-semibold ${navTextClass}`}
                 >
                   {item.label}
                 </button>

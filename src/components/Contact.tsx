@@ -78,11 +78,12 @@ const Contact = () => {
 
 
   return (
-    <section id="contact" className="py-20 bg-gray-900/70 dark:bg-gray-100/80">
+    <section id="contact" className="modern-section py-20 bg-gradient-to-b from-slate-950/80 to-slate-900/80 dark:from-slate-100 dark:to-blue-50/70">
       <div className="container mx-auto px-6">
+        <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl float-slow"></div>
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white dark:text-black">
-            Get In <span className="text-blue-400 dark:text-gray-800">Touch</span>
+            Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-gray-300 dark:text-gray-700 max-w-2xl mx-auto">
             Ready to collaborate on your next project? Let's discuss how I can help bring your ideas to life.
@@ -104,7 +105,7 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-4 p-4 glow-card rounded-lg transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 glow-card modern-panel card-sheen rounded-xl transition-all duration-300 group hover:-translate-y-1"
                 >
                   <div className="p-3 bg-gray-700/50 dark:bg-gray-300/50 rounded-lg text-blue-400 dark:text-gray-700 group-hover:scale-110 transition-transform duration-300">
                     {info.icon}
@@ -136,7 +137,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-3 glow-card rounded-lg text-gray-400 ${social.color} transition-all duration-300 hover:transform hover:scale-110 magnetic-button`}
+                    className={`p-3 glow-card modern-panel rounded-lg text-gray-400 ${social.color} transition-all duration-300 hover:scale-110 magnetic-button`}
                   >
                     {social.icon}
                   </a>
@@ -147,7 +148,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="animate-fade-in-right">
-            <div className="glow-card rounded-lg p-8 transition-all duration-300">
+            <div className="glow-card modern-panel card-sheen rounded-xl p-8 transition-all duration-300">
               <h3 className="text-2xl font-bold text-white dark:text-black mb-6">Send Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -178,7 +179,7 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-slate-900/55 dark:bg-gray-200/50 border border-slate-600/70 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-cyan-300 dark:focus:border-gray-600 focus:ring-1 focus:ring-cyan-300 dark:focus:ring-gray-600 transition-all duration-300"
                     placeholder="Enter your full name"
                     required
                     aria-describedby="name-error"
@@ -195,7 +196,7 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-slate-900/55 dark:bg-gray-200/50 border border-slate-600/70 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-cyan-300 dark:focus:border-gray-600 focus:ring-1 focus:ring-cyan-300 dark:focus:ring-gray-600 transition-all duration-300"
                     placeholder="your.email@example.com"
                     required
                     aria-describedby="email-error"
@@ -212,7 +213,7 @@ const Contact = () => {
                     rows={6}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-700/50 dark:bg-gray-200/50 border border-gray-600 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-blue-400 dark:focus:border-gray-600 focus:ring-1 focus:ring-blue-400 dark:focus:ring-gray-600 transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-slate-900/55 dark:bg-gray-200/50 border border-slate-600/70 dark:border-gray-400 rounded-lg text-white dark:text-black placeholder-gray-400 dark:placeholder-gray-600 focus:border-cyan-300 dark:focus:border-gray-600 focus:ring-1 focus:ring-cyan-300 dark:focus:ring-gray-600 transition-all duration-300 resize-none"
                     placeholder="Tell me about your project, collaboration ideas, or any questions you have..."
                     required
                     aria-describedby="message-error"
@@ -222,7 +223,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full magnetic-button px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-glow flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full magnetic-button px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
