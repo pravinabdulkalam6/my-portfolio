@@ -47,7 +47,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className={`min-h-screen bg-black dark:bg-white text-white dark:text-black transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`app-shell min-h-screen text-white dark:text-black transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <Header />
         <main className="relative">
           <Hero />

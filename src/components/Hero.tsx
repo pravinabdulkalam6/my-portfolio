@@ -4,7 +4,13 @@ import ProfileImage from './ProfileImage';
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
-  const fullText = 'Site Reliability and Data Engineering Professional';
+  const fullText = 'Site Reliability Engineer (SRE) | Security & Data Engineering';
+  const topHighlights = [
+    'SOC/XDR implementation with Wazuh',
+    'Cross-platform automation testing (Appium iOS/Android)',
+    'Predictive ETL pipeline for capacity planning',
+    'Kubernetes platform with CI/CD automation'
+  ];
 
   useEffect(() => {
     let index = 0;
@@ -29,12 +35,12 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-black via-blue-900/20 to-purple-900/20 dark:from-white dark:via-blue-50/50 dark:to-purple-50/50">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950/70 dark:from-[#f7fbff] dark:via-[#eef7ff] dark:to-[#dcecff]">
       {/* Enhanced Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-500/8 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/8 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/8 dark:bg-blue-400/18 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-500/8 dark:bg-cyan-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/8 dark:bg-indigo-300/18 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       {/* Floating Particles */}
@@ -59,47 +65,49 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-20 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Left Content */}
           <div className="lg:w-1/2 text-center lg:text-left animate-fade-in-up">
             <div className="mb-8">
               <div className="mb-4">
-                <span className="inline-block px-4 py-2 bg-blue-500/10 dark:bg-gray-800/50 border border-blue-500/20 dark:border-gray-600 rounded-full text-blue-400 dark:text-gray-800 text-sm font-medium mb-4 animate-scale-in">
-                  Welcome to my portfolio
+                <span className="inline-block px-3 sm:px-4 py-2 bg-cyan-400/10 dark:bg-white/70 border border-cyan-400/30 dark:border-blue-200 rounded-full text-cyan-300 dark:text-blue-700 text-xs sm:text-sm leading-tight font-medium mb-4 animate-scale-in shadow-sm">
+                  Site Reliability Engineer (SRE) | Security & Data Engineering
                 </span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight text-shadow-lg text-white dark:text-black">
-                Hi, I'm{' '}
-                <span className="text-sky-500 dark:text-gray-900 font-extrabold tracking-tight drop-shadow-lg">
+              <h1 className="mb-4 leading-tight">
+                <span className="block text-3xl md:text-4xl font-semibold text-slate-200 dark:text-slate-700 tracking-tight">
+                  Hi, I&apos;m
+                </span>
+                <span className="block text-4xl md:text-6xl font-extrabold tracking-tight gradient-text drop-shadow-[0_6px_24px_rgba(26,122,248,0.28)]">
                   Pravin Abdul Kalam M
                 </span>
               </h1>
               
-              <h2 className="text-xl md:text-2xl text-gray-300 dark:text-gray-600 mb-6 min-h-[2rem]">
-                <span className="typing-animation">{typedText}</span>
+              <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 dark:text-slate-700 mb-6 min-h-[4rem] sm:min-h-[3rem] md:min-h-[2rem]">
+                <span className="typing-animation break-words">{typedText}</span>
               </h2>
               
-              <p className="text-lg text-gray-400 dark:text-gray-600 max-w-2xl leading-relaxed space-y-2">
-                Passionate about designing <span className="text-blue-400 dark:text-gray-700 font-semibold">scalable infrastructure</span>, 
-                automating deployment workflows, and implementing <span className="text-teal-400 dark:text-gray-700 font-semibold">real-time monitoring systems</span>{' '}using cutting-edge technologies.
+              <p className="text-lg text-gray-400 dark:text-slate-700 max-w-2xl leading-relaxed space-y-2">
+                Passionate about designing <span className="text-blue-400 dark:text-blue-700 font-semibold">scalable infrastructure</span>, 
+                automating deployment workflows, and implementing <span className="text-teal-400 dark:text-cyan-700 font-semibold">real-time monitoring systems</span>{' '}using cutting-edge technologies.
               </p>
             </div>
 
             {/* Enhanced Contact Info */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8 text-sm">
-              <div className="flex items-center gap-3 px-4 py-3 bg-gray-800/50 dark:bg-white/70 rounded-lg border border-gray-700/50 dark:border-gray-300/50 hover:border-blue-500/50 dark:hover:border-gray-600/50 transition-all duration-300">
-                <MapPin size={16} className="text-blue-400 dark:text-gray-700 flex-shrink-0" />
-                <span className="text-gray-300 dark:text-gray-700 whitespace-nowrap">Chennai, India</span>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 text-sm w-full">
+              <div className="flex items-center gap-3 px-4 py-3 bg-slate-900/55 dark:bg-white/85 rounded-xl border border-slate-700/60 dark:border-blue-200 hover:border-cyan-300/60 dark:hover:border-blue-400/60 transition-all duration-300 shadow-sm w-full sm:w-auto justify-center sm:justify-start">
+                <MapPin size={16} className="text-blue-400 dark:text-blue-700 flex-shrink-0" />
+                <span className="text-gray-300 dark:text-slate-700 whitespace-nowrap">Chennai, India</span>
               </div>
-              <div className="flex items-center gap-3 px-4 py-3 bg-gray-800/50 dark:bg-white/70 rounded-lg border border-gray-700/50 dark:border-gray-300/50 hover:border-blue-500/50 dark:hover:border-gray-600/50 transition-all duration-300">
-                <Mail size={16} className="text-teal-400 dark:text-gray-700 flex-shrink-0" />
-                <span className="text-gray-300 dark:text-gray-700 text-xs sm:text-sm">pravinabdulkalam6@gmail.com</span>
+              <div className="flex items-center gap-3 px-4 py-3 bg-slate-900/55 dark:bg-white/85 rounded-xl border border-slate-700/60 dark:border-blue-200 hover:border-cyan-300/60 dark:hover:border-blue-400/60 transition-all duration-300 shadow-sm w-full sm:w-auto justify-center sm:justify-start">
+                <Mail size={16} className="text-teal-400 dark:text-cyan-700 flex-shrink-0" />
+                <span className="text-gray-300 dark:text-slate-700 text-xs sm:text-sm break-all">pravinabdulkalam6@gmail.com</span>
               </div>
-              <div className="flex items-center gap-3 px-4 py-3 bg-gray-800/50 dark:bg-white/70 rounded-lg border border-gray-700/50 dark:border-gray-300/50 hover:border-blue-500/50 dark:hover:border-gray-600/50 transition-all duration-300">
-                <Phone size={16} className="text-purple-400 dark:text-gray-700 flex-shrink-0" />
-                <span className="text-gray-300 dark:text-gray-700 whitespace-nowrap">+91 7904493896</span>
+              <div className="flex items-center gap-3 px-4 py-3 bg-slate-900/55 dark:bg-white/85 rounded-xl border border-slate-700/60 dark:border-blue-200 hover:border-cyan-300/60 dark:hover:border-blue-400/60 transition-all duration-300 shadow-sm w-full sm:w-auto justify-center sm:justify-start">
+                <Phone size={16} className="text-purple-400 dark:text-indigo-700 flex-shrink-0" />
+                <span className="text-gray-300 dark:text-slate-700 whitespace-nowrap">+91 7904493896</span>
               </div>
             </div>
 
@@ -107,7 +115,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-6">
               <button 
                 onClick={scrollToContact}
-                className="magnetic-button px-8 py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-glow flex items-center gap-3 justify-center group"
+                className="magnetic-button px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg flex items-center gap-3 justify-center group"
               >
                 <Sparkles size={18} className="group-hover:rotate-12 transition-transform duration-300" />
                 Get In Touch
@@ -115,26 +123,27 @@ const Hero = () => {
               <a
                 href="/resume/Resume.pdf"
                 download="Pravin_Abdul_Kalam_M_Resume.pdf"
-                className="magnetic-button px-8 py-4 bg-gray-800/80 dark:bg-gray-200/80 border border-gray-600 dark:border-gray-500 text-gray-200 dark:text-gray-800 rounded-lg font-medium hover:bg-gray-700 dark:hover:bg-gray-300 hover:border-blue-400 dark:hover:border-gray-700 hover:text-blue-400 dark:hover:text-gray-900 transition-all duration-300 flex items-center gap-3 justify-center group shadow-lg"
+                className="magnetic-button px-8 py-4 bg-slate-900/70 dark:bg-gray-200/80 border border-slate-600/70 dark:border-gray-500 text-gray-200 dark:text-gray-800 rounded-xl font-semibold hover:bg-slate-800/80 dark:hover:bg-gray-300 hover:border-cyan-300 dark:hover:border-gray-700 hover:text-cyan-300 dark:hover:text-gray-900 transition-all duration-300 flex items-center gap-3 justify-center group shadow-lg"
               >
                 <Download size={18} className="group-hover:translate-y-1 transition-transform duration-300" />
                 Download CV
               </a>
             </div>
 
-            {/* Stats */}
-            <div className="flex justify-center lg:justify-start gap-8 mt-8 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-400 dark:text-gray-800">2+</div>
-                <div className="text-xs text-gray-500 dark:text-gray-600">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-teal-400 dark:text-gray-800">50+</div>
-                <div className="text-xs text-gray-500 dark:text-gray-600">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-400 dark:text-gray-800">10+</div>
-                <div className="text-xs text-gray-500 dark:text-gray-600">Technologies</div>
+            {/* Top Highlights */}
+            <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+              <p className="text-sm font-semibold tracking-wide uppercase text-cyan-300 dark:text-blue-700 mb-3">
+                Top Highlights
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {topHighlights.map((item, index) => (
+                  <div
+                    key={index}
+                    className="px-4 py-3 rounded-xl bg-slate-900/55 dark:bg-white/85 border border-slate-700/60 dark:border-blue-200 text-xs sm:text-sm text-slate-200 dark:text-slate-700 font-medium leading-relaxed"
+                  >
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -147,7 +156,7 @@ const Hero = () => {
                 {/* Profile Image */}
                 <ProfileImage 
                   src="/images/profile.jpeg"
-                  alt="Pravin Abdul Kalam M - Site Reliability and Data Engineering Professional"
+                  alt="Pravin Abdul Kalam M - Site Reliability Engineer (SRE) | Security & Data Engineering"
                   fallbackText="PAK"
                 />
               </div>

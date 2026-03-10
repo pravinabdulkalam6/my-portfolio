@@ -1,67 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { Server, Database, Activity, Shield, TrendingUp, Terminal, Cpu, HardDrive, Wifi, CheckCircle } from 'lucide-react';
+import { Server, Database, Activity, Shield, Terminal, Cpu, CheckCircle } from 'lucide-react';
 
 interface LoaderProps {
   onLoadingComplete: () => void;
 }
 
+const bootSequence = [
+  { text: "$ initializing_sre_systems...", delay: 0, color: "text-green-400" },
+  { text: "✓ Docker containers: HEALTHY", delay: 400, color: "text-blue-400" },
+  { text: "✓ Kubernetes cluster: RUNNING", delay: 700, color: "text-cyan-400" },
+  { text: "✓ Prometheus metrics: COLLECTING", delay: 1000, color: "text-orange-400" },
+  { text: "✓ Grafana dashboards: ONLINE", delay: 1300, color: "text-purple-400" },
+  { text: "✓ CI/CD pipelines: OPERATIONAL", delay: 1600, color: "text-teal-400" },
+  { text: "✓ Load balancers: OPTIMIZED", delay: 1900, color: "text-pink-400" },
+  { text: "✓ SSL certificates: VALID", delay: 2200, color: "text-green-400" },
+  { text: "✓ Database connections: STABLE", delay: 2500, color: "text-blue-400" },
+  { text: "$ system_reliability: 99.99%", delay: 2800, color: "text-emerald-400" },
+  { text: "$ loading_portfolio...", delay: 3100, color: "text-yellow-400" },
+];
+
+const systemChecks = [
+  { icon: <Server className="w-6 h-6" />, label: "Infrastructure", status: "initializing" },
+  { icon: <Database className="w-6 h-6" />, label: "Data Pipeline", status: "initializing" },
+  { icon: <Activity className="w-6 h-6" />, label: "Monitoring", status: "initializing" },
+  { icon: <Shield className="w-6 h-6" />, label: "Security", status: "initializing" },
+  { icon: <Terminal className="w-6 h-6" />, label: "Automation", status: "initializing" },
+  { icon: <Cpu className="w-6 h-6" />, label: "Performance", status: "initializing" }
+];
+
+const phases = [
+  "Booting SRE Systems...",
+  "Checking Infrastructure Health...",
+  "Validating Service Mesh...",
+  "Optimizing Resource Allocation...",
+  "System Ready - Welcome!"
+];
+
 const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
   const [currentPhase, setCurrentPhase] = useState(0);
-  const [showTerminal, setShowTerminal] = useState(false);
   const [terminalLines, setTerminalLines] = useState<string[]>([]);
-  const [currentSystemCheck, setCurrentSystemCheck] = useState(0);
-
-  const bootSequence = [
-    { text: "$ initializing_sre_systems...", delay: 0, color: "text-green-400" },
-    { text: "✓ Docker containers: HEALTHY", delay: 400, color: "text-blue-400" },
-    { text: "✓ Kubernetes cluster: RUNNING", delay: 700, color: "text-cyan-400" },
-    { text: "✓ Prometheus metrics: COLLECTING", delay: 1000, color: "text-orange-400" },
-    { text: "✓ Grafana dashboards: ONLINE", delay: 1300, color: "text-purple-400" },
-    { text: "✓ CI/CD pipelines: OPERATIONAL", delay: 1600, color: "text-teal-400" },
-    { text: "✓ Load balancers: OPTIMIZED", delay: 1900, color: "text-pink-400" },
-    { text: "✓ SSL certificates: VALID", delay: 2200, color: "text-green-400" },
-    { text: "✓ Database connections: STABLE", delay: 2500, color: "text-blue-400" },
-    { text: "$ system_reliability: 99.99%", delay: 2800, color: "text-emerald-400" },
-    { text: "$ loading_portfolio...", delay: 3100, color: "text-yellow-400" },
-  ];
-
-  const systemChecks = [
-    { icon: <Server className="w-6 h-6" />, label: "Infrastructure", status: "initializing" },
-    { icon: <Database className="w-6 h-6" />, label: "Data Pipeline", status: "initializing" },
-    { icon: <Activity className="w-6 h-6" />, label: "Monitoring", status: "initializing" },
-    { icon: <Shield className="w-6 h-6" />, label: "Security", status: "initializing" },
-    { icon: <Terminal className="w-6 h-6" />, label: "Automation", status: "initializing" },
-    { icon: <Cpu className="w-6 h-6" />, label: "Performance", status: "initializing" }
-  ];
 
   const [systems, setSystems] = useState(systemChecks);
 
-  const phases = [
-    "Booting SRE Systems...",
-    "Checking Infrastructure Health...",
-    "Validating Service Mesh...",
-    "Optimizing Resource Allocation...",
-    "System Ready - Welcome!"
-  ];
-
   useEffect(() => {
-    // Show terminal immediately for debugging
-    setShowTerminal(true);
-
     // Progressive system checks - balanced timing
     const systemTimer = setInterval(() => {
-      setCurrentSystemCheck(prev => {
-        if (prev < systems.length - 1) {
-          setSystems(currentSystems => 
-            currentSystems.map((system, index) => 
-              index === prev ? { ...system, status: 'completed' } : system
-            )
-          );
-          return prev + 1;
-        }
-        return prev;
-      });
+      setSystems(currentSystems =>
+        currentSystems.map((system, index) =>
+          index <= currentSystems.findIndex(item => item.status !== 'completed')
+            ? { ...system, status: 'completed' }
+            : system
+        )
+      );
     }, 500);
 
     // Terminal text animation - balanced timing
@@ -96,7 +87,7 @@ const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
       clearInterval(systemTimer);
       clearInterval(interval);
     };
-  }, [onLoadingComplete, phases.length]);
+  }, [onLoadingComplete]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden">

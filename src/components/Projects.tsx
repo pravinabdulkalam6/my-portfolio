@@ -10,12 +10,10 @@ import {
   GitBranch, 
   Activity, 
   Monitor, 
-  Terminal, 
   Cloud, 
   Settings, 
   FileCode, 
   Network, 
-  HardDrive,
   Globe,
   Box,
   Cpu
@@ -60,13 +58,33 @@ const Projects = () => {
       'Automated Testing': <Shield className="w-3 h-3" />,
       'Arabic Localization': <Globe className="w-3 h-3" />,
       'UI Testing': <Monitor className="w-3 h-3" />,
-      'CI/CD Integration': <GitBranch className="w-3 h-3" />
+      'CI/CD Integration': <GitBranch className="w-3 h-3" />,
+      'Wazuh': <Shield className="w-3 h-3" />,
+      'SOC Monitoring': <Monitor className="w-3 h-3" />,
+      'XDR': <Activity className="w-3 h-3" />,
+      'Threat Detection': <Shield className="w-3 h-3" />,
+      'Incident Response': <Zap className="w-3 h-3" />,
+      'SIEM': <Database className="w-3 h-3" />,
+      'YARA': <Shield className="w-3 h-3" />,
+      'Active Response': <Zap className="w-3 h-3" />,
+      'SSH Brute Force Detection': <Shield className="w-3 h-3" />,
+      'Suricata': <Network className="w-3 h-3" />,
+      'Auditd': <Activity className="w-3 h-3" />,
+      'Custom Rules': <Settings className="w-3 h-3" />,
+      'Custom Decoders': <FileCode className="w-3 h-3" />
     };
     
     return iconMap[tech] || <Code className="w-3 h-3" />;
   };
 
   const achievements = [
+    {
+      title: "SOC XDR Implementation with Wazuh",
+      description: "Implemented an XDR-level SOC capability using Wazuh with centralized log ingestion, real-time correlation rules, and alert triage workflows. Added YARA-based malware detection, active response for SSH brute-force attacks, Suricata integration for network security events, and Auditd-based system event collection. Built customized Wazuh rules and decoders to improve detection coverage and response speed.",
+      technologies: ["Wazuh", "SOC Monitoring", "XDR", "SIEM", "YARA", "Active Response", "SSH Brute Force Detection", "Suricata", "Auditd", "Custom Rules", "Custom Decoders", "Threat Detection", "Incident Response"],
+      icon: <Shield className="w-8 h-8 text-cyan-300" />,
+      gradient: "from-cyan-500/20 to-blue-500/20"
+    },
     {
       title: "Cross-Platform Bilingual Testing Framework",
       description: "Architected Appium-based framework supporting Android/iOS with English/Arabic bilingual capabilities, featuring RTL text validation and dynamic UI element detection. Achieved 40% improvement in testing efficiency and comprehensive cross-platform coverage.",
@@ -98,14 +116,14 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-black dark:bg-white">
+    <section id="projects" className="modern-section py-20 bg-gradient-to-b from-slate-900 to-slate-950 dark:from-blue-50/60 dark:to-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white dark:text-black">
-            Key <span className="text-blue-400 dark:text-gray-800">Achievements</span>
+            Key <span className="gradient-text">Achievements</span>
           </h2>
           <p className="text-gray-300 dark:text-gray-700 max-w-2xl mx-auto">
-            Showcasing key projects that demonstrate my expertise in Site Reliability Engineering, Data Engineering, and Automation
+            Showcasing key projects that demonstrate my expertise in Site Reliability Engineering, Security Engineering, and Data Engineering
           </p>
         </div>
 
@@ -114,14 +132,14 @@ const Projects = () => {
           {achievements.map((achievement, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden glow-card rounded-lg transition-all duration-300 animate-fade-in-up"
+              className="group relative overflow-hidden glow-card modern-panel card-sheen rounded-xl transition-all duration-300 animate-fade-in-up hover:-translate-y-1"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${achievement.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
               
               <div className="relative p-6 z-10">
                 <div className="flex items-start mb-4">
-                  <div className="p-3 bg-gray-700/50 dark:bg-gray-300/50 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-3 bg-slate-800/60 dark:bg-gray-200/60 rounded-lg group-hover:scale-110 transition-transform duration-300">
                     {achievement.icon}
                   </div>
                 </div>

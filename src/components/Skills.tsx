@@ -69,6 +69,17 @@ const Skills = () => {
         { name: "Airflow", level: 72, icon: <Network className="w-5 h-5" /> },
         { name: "Shell Scripting", level: 85, icon: <Terminal className="w-5 h-5" /> }
       ]
+    },
+    {
+      title: "SOC & Security",
+      icon: <Shield className="w-8 h-8 text-cyan-300" />,
+      skills: [
+        { name: "Wazuh", level: 82, icon: <Shield className="w-5 h-5" /> },
+        { name: "SIEM Monitoring", level: 80, icon: <Monitor className="w-5 h-5" /> },
+        { name: "Threat Detection", level: 78, icon: <Activity className="w-5 h-5" /> },
+        { name: "Incident Response", level: 76, icon: <Zap className="w-5 h-5" /> },
+        { name: "Vulnerability Triage", level: 74, icon: <FileCode className="w-5 h-5" /> }
+      ]
     }
   ];
 
@@ -90,18 +101,18 @@ const Skills = () => {
   }, []);
 
   return (
-    <section id="skills" className="py-20 bg-gray-900/70 dark:bg-gray-100/80" ref={sectionRef}>
+    <section id="skills" className="py-20 bg-gradient-to-b from-slate-950/70 to-slate-900/70 dark:from-slate-100/80 dark:to-blue-50/70" ref={sectionRef}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white dark:text-black">
-            Technical <span className="text-blue-400 dark:text-gray-800">Skills</span>
+            Technical <span className="gradient-text">Skills</span>
           </h2>
           <p className="text-gray-300 dark:text-gray-700 max-w-2xl mx-auto">
             A comprehensive overview of my technical expertise and proficiency levels
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
           {skillCategories.map((category, categoryIndex) => (
             <div
               key={categoryIndex}
@@ -178,17 +189,16 @@ const Skills = () => {
               { name: 'Terraform', icon: <Cloud className="w-4 h-4" /> },
               { name: 'Ansible', icon: <Settings className="w-4 h-4" /> },
               { name: 'Selenium', icon: <Monitor className="w-4 h-4" /> },
-              { name: 'TestNG', icon: <Shield className="w-4 h-4" /> },
               { name: 'Arabic Localization', icon: <Globe className="w-4 h-4" /> },
               { name: 'UI Testing', icon: <Monitor className="w-4 h-4" /> },
-              { name: 'Mobile Testing', icon: <Cpu className="w-4 h-4" /> },
               { name: 'ARIMA', icon: <Activity className="w-4 h-4" /> },
               { name: 'SARIMAX', icon: <Activity className="w-4 h-4" /> },
               { name: 'ETS', icon: <Activity className="w-4 h-4" /> },
               { name: 'Time Series Analysis', icon: <Activity className="w-4 h-4" /> },
               { name: 'Predictive Modeling', icon: <Activity className="w-4 h-4" /> },
-              { name: 'Vault', icon: <Shield className="w-4 h-4" /> },
-              { name: 'Helm', icon: <Settings className="w-4 h-4" /> }
+              { name: 'Helm', icon: <Settings className="w-4 h-4" /> },
+              { name: 'Wazuh', icon: <Shield className="w-4 h-4" /> },
+              { name: 'SOC Monitoring', icon: <Monitor className="w-4 h-4" /> }
             ].map((tech, index) => (
               <span
                 key={index}
