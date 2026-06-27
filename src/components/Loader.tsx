@@ -1,272 +1,150 @@
 import React, { useState, useEffect } from 'react';
-import { Server, Database, Activity, Shield, Terminal, Cpu, CheckCircle } from 'lucide-react';
+import Logo from './Logo';
 
 interface LoaderProps {
   onLoadingComplete: () => void;
 }
 
-const bootSequence = [
-  { text: "$ initializing_sre_systems...", delay: 0, color: "text-green-400" },
-  { text: "✓ Docker containers: HEALTHY", delay: 400, color: "text-blue-400" },
-  { text: "✓ Kubernetes cluster: RUNNING", delay: 700, color: "text-cyan-400" },
-  { text: "✓ Prometheus metrics: COLLECTING", delay: 1000, color: "text-orange-400" },
-  { text: "✓ Grafana dashboards: ONLINE", delay: 1300, color: "text-purple-400" },
-  { text: "✓ CI/CD pipelines: OPERATIONAL", delay: 1600, color: "text-teal-400" },
-  { text: "✓ Load balancers: OPTIMIZED", delay: 1900, color: "text-pink-400" },
-  { text: "✓ SSL certificates: VALID", delay: 2200, color: "text-green-400" },
-  { text: "✓ Database connections: STABLE", delay: 2500, color: "text-blue-400" },
-  { text: "$ system_reliability: 99.99%", delay: 2800, color: "text-emerald-400" },
-  { text: "$ loading_portfolio...", delay: 3100, color: "text-yellow-400" },
-];
-
-const systemChecks = [
-  { icon: <Server className="w-6 h-6" />, label: "Infrastructure", status: "initializing" },
-  { icon: <Database className="w-6 h-6" />, label: "Data Pipeline", status: "initializing" },
-  { icon: <Activity className="w-6 h-6" />, label: "Monitoring", status: "initializing" },
-  { icon: <Shield className="w-6 h-6" />, label: "Security", status: "initializing" },
-  { icon: <Terminal className="w-6 h-6" />, label: "Automation", status: "initializing" },
-  { icon: <Cpu className="w-6 h-6" />, label: "Performance", status: "initializing" }
-];
-
 const phases = [
-  "Booting SRE Systems...",
-  "Checking Infrastructure Health...",
-  "Validating Service Mesh...",
-  "Optimizing Resource Allocation...",
-  "System Ready - Welcome!"
+  'Booting reliability systems',
+  'Syncing GitOps deployments',
+  'Streaming observability metrics',
+  'Arming SOC security controls',
+  'Welcome',
 ];
 
 const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [currentPhase, setCurrentPhase] = useState(0);
-  const [terminalLines, setTerminalLines] = useState<string[]>([]);
-
-  const [systems, setSystems] = useState(systemChecks);
+  const [phaseIndex, setPhaseIndex] = useState(0);
 
   useEffect(() => {
-    // Progressive system checks - balanced timing
-    const systemTimer = setInterval(() => {
-      setSystems(currentSystems =>
-        currentSystems.map((system, index) =>
-          index <= currentSystems.findIndex(item => item.status !== 'completed')
-            ? { ...system, status: 'completed' }
-            : system
-        )
-      );
-    }, 500);
-
-    // Terminal text animation - balanced timing
-    bootSequence.forEach((line, index) => {
-      setTimeout(() => {
-        setTerminalLines(prev => [...prev, line.text]);
-      }, 300 + (index * 300));
-    });
-
-    // Progress animation - balanced speed
     const interval = setInterval(() => {
-      setProgress(prev => {
-        const newProgress = prev + Math.random() * 2.5 + 1.5;
-        
-        // Update phase based on progress
-        const phaseIndex = Math.floor((newProgress / 100) * phases.length);
-        setCurrentPhase(Math.min(phaseIndex, phases.length - 1));
-        
-        if (newProgress >= 100) {
+      setProgress((prev) => {
+        const next = prev + Math.random() * 3 + 1.5;
+
+        const idx = Math.floor((next / 100) * phases.length);
+        setPhaseIndex(Math.min(idx, phases.length - 1));
+
+        if (next >= 100) {
           clearInterval(interval);
-          setTimeout(() => {
-            onLoadingComplete();
-          }, 1000);
+          setTimeout(onLoadingComplete, 500);
           return 100;
         }
-        
-        return newProgress;
+        return next;
       });
-    }, 100);
+    }, 60);
 
-    return () => {
-      clearInterval(systemTimer);
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, [onLoadingComplete]);
 
+  // Circular progress geometry
+  const size = 220;
+  const stroke = 6;
+  const radius = (size - stroke * 2) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const dashoffset = circumference * (1 - progress / 100);
+  const rounded = Math.round(progress);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden">
-      {/* Matrix-style Background */}
-      <div className="absolute inset-0">
-        {/* Network Grid */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="grid grid-cols-12 grid-rows-8 h-full w-full">
-            {[...Array(96)].map((_, i) => (
-              <div
-                key={i}
-                className="border border-green-500/20 animate-pulse"
-                style={{
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`
-                }}
-              />
-            ))}
-          </div>
-        </div>
-        
-        {/* Data Flow Lines */}
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent animate-pulse"
-            style={{
-              left: `${10 + i * 10}%`,
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: '3s'
-            }}
-          />
-        ))}
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-[#050816]">
+      {/* Ambient backdrop */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-[28rem] h-[28rem] bg-blue-600/15 rounded-full blur-3xl animate-aurora"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[24rem] h-[24rem] bg-cyan-500/12 rounded-full blur-3xl animate-aurora" style={{ animationDelay: '5s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-[20rem] h-[20rem] bg-emerald-500/10 rounded-full blur-3xl animate-aurora" style={{ animationDelay: '9s' }}></div>
       </div>
+      {/* Faint grid */}
+      <div
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(120,170,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(120,170,255,0.5) 1px, transparent 1px)',
+          backgroundSize: '46px 46px',
+          maskImage: 'radial-gradient(ellipse at center, black 25%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 25%, transparent 75%)',
+        }}
+      ></div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6">
-        
-        {/* Central Hub Animation */}
-        <div className="text-center mb-12">
-          <div className="relative w-40 h-40 mx-auto mb-8">
-            {/* Rotating Server Ring */}
-            <div className="absolute inset-0 rounded-full border-4 border-green-400/30 animate-spin"></div>
-            <div className="absolute inset-4 rounded-full border-4 border-transparent border-t-blue-400 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '2s' }}></div>
-            
-            {/* Central Server Icon */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg flex items-center justify-center shadow-2xl animate-glow-pulse">
-                <Server className="w-10 h-10 text-white" />
-              </div>
-            </div>
-            
-            {/* Orbiting System Icons */}
-            {systems.map((system, index) => {
-              const angle = (index * 2 * Math.PI) / systems.length;
-              const radius = 80;
-              const x = 50 + (radius * Math.cos(angle)) / 2;
-              const y = 50 + (radius * Math.sin(angle)) / 2;
-              
-              return (
-                <div
-                  key={index}
-                  className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
-                    system.status === 'completed' ? 'text-green-400' : 'text-gray-500'
-                  }`}
-                  style={{
-                    left: `${x}%`,
-                    top: `${y}%`,
-                  }}
-                >
-                  <div className={`p-3 rounded-lg ${
-                    system.status === 'completed' ? 'bg-green-500/20' : 'bg-gray-800/50'
-                  } border ${
-                    system.status === 'completed' ? 'border-green-400/50' : 'border-gray-600/50'
-                  } transition-all duration-500`}>
-                    {system.icon}
-                  </div>
-                </div>
-              );
-            })}
+      <div className="relative z-10 flex flex-col items-center px-6">
+        {/* Progress ring */}
+        <div className="relative" style={{ width: size, height: size }}>
+          {/* Slow rotating accent ring */}
+          <div className="absolute inset-0 rounded-full border border-cyan-400/10 animate-spin" style={{ animationDuration: '14s' }}>
+            <div className="absolute -top-[3px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-glow"></div>
           </div>
 
-          {/* SRE Title */}
-          <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-green-400 via-blue-400 to-cyan-400 bg-clip-text mb-4 animate-pulse">
-              SITE RELIABILITY ENGINEER
-            </h1>
-            <p className="text-green-400 text-xl font-mono font-semibold">
-              Ensuring 99.99% uptime & optimal performance
-            </p>
-          </div>
-        </div>
+          <svg width={size} height={size} className="-rotate-90">
+            <defs>
+              <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#26d0ce" />
+                <stop offset="50%" stopColor="#1a7af8" />
+                <stop offset="100%" stopColor="#22c55e" />
+              </linearGradient>
+            </defs>
+            {/* Track */}
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              fill="none"
+              stroke="rgba(255,255,255,0.06)"
+              strokeWidth={stroke}
+            />
+            {/* Progress */}
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              fill="none"
+              stroke="url(#ringGradient)"
+              strokeWidth={stroke}
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={dashoffset}
+              style={{ transition: 'stroke-dashoffset 0.1s linear', filter: 'drop-shadow(0 0 6px rgba(38,208,206,0.5))' }}
+            />
+          </svg>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Terminal Output */}
-          <div className="bg-black/90 rounded-lg border-2 border-green-500/50 p-4 h-64 overflow-hidden">
-            <div className="flex items-center mb-4">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span className="ml-4 text-green-400 text-sm font-mono font-bold">SRE-Terminal v2.0</span>
+          {/* Center content */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="mb-3 rounded-2xl animate-glow-pulse">
+              <Logo className="w-14 h-14" />
             </div>
-            <div className="space-y-2 text-sm font-mono">
-              {terminalLines.map((line, index) => {
-                const bootLine = bootSequence.find(b => b.text === line);
-                const lineColor = bootLine?.color || 'text-green-400';
-                return (
-                  <div key={index} className={lineColor}>
-                    {line}
-                  </div>
-                );
-              })}
-              <div className="flex items-center mt-2">
-                <span className="text-green-400">$ </span>
-                <div className="w-2 h-4 bg-green-400 ml-1 animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* System Status Panel */}
-          <div className="bg-gray-900/90 rounded-lg border-2 border-blue-500/50 p-4">
-            <h3 className="text-blue-400 font-bold mb-4 flex items-center text-lg">
-              <Activity className="w-6 h-6 mr-2" />
-              System Health Monitor
-            </h3>
-            <div className="space-y-3">
-              {systems.map((system, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center justify-between p-3 rounded-lg ${
-                    system.status === 'completed' 
-                      ? 'bg-green-500/20 border-2 border-green-500/50' 
-                      : 'bg-gray-800/70 border-2 border-gray-600/50'
-                  } transition-all duration-500`}
-                >
-                  <div className="flex items-center">
-                    <div className={system.status === 'completed' ? 'text-green-400' : 'text-gray-400'}>
-                      {system.icon}
-                    </div>
-                    <span className={`ml-3 font-medium ${system.status === 'completed' ? 'text-green-400' : 'text-gray-300'}`}>
-                      {system.label}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    {system.status === 'completed' ? (
-                      <CheckCircle className="w-5 h-5 text-green-400" />
-                    ) : (
-                      <div className="w-5 h-5 border-2 border-gray-400 border-t-blue-400 rounded-full animate-spin"></div>
-                    )}
-                  </div>
-                </div>
-              ))}
+            <div className="text-4xl font-extrabold tabular-nums text-white tracking-tight">
+              {rounded}
+              <span className="text-xl align-top text-cyan-300">%</span>
             </div>
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mt-8 bg-gray-900/80 rounded-lg p-4 border border-green-500/30">
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-green-400 font-mono text-lg font-semibold">{phases[currentPhase]}</span>
-            <span className="text-cyan-400 font-mono font-bold text-xl">{Math.round(progress)}%</span>
-          </div>
-          <div className="w-full bg-gray-800 rounded-full h-4 overflow-hidden border border-gray-600">
-            <div 
-              className="h-full bg-gradient-to-r from-green-500 via-blue-500 to-cyan-500 transition-all duration-300 ease-out relative"
-              style={{ width: `${progress}%` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
-            </div>
-          </div>
+        {/* Identity */}
+        <h1 className="mt-8 text-2xl md:text-3xl font-extrabold tracking-tight gradient-text">
+          Pravin Abdul Kalam M
+        </h1>
+        <p className="mt-2 text-xs md:text-sm font-medium text-slate-400 tracking-wide text-center">
+          SRE · DevOps &amp; GitOps · Full-Stack &amp; Data · Security &amp; SOC
+        </p>
+
+        {/* Cycling status */}
+        <div className="mt-8 flex items-center gap-2.5 h-5">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 animate-ping"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+          </span>
+          <span className="text-sm font-mono text-slate-300">
+            {phases[phaseIndex]}
+            {phaseIndex < phases.length - 1 ? '…' : ' 🎉'}
+          </span>
         </div>
 
-        {/* Status Message */}
-        <div className="text-center mt-6">
-          <p className="text-cyan-400 text-lg font-mono font-semibold animate-pulse">
-            ⚡ Establishing secure connection to portfolio infrastructure...
-          </p>
+        {/* Slim bar */}
+        <div className="mt-6 w-60 sm:w-72 h-1 rounded-full bg-white/10 overflow-hidden">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-emerald-400 relative"
+            style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+          </div>
         </div>
       </div>
     </div>

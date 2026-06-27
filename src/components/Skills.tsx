@@ -27,14 +27,36 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: "SRE & Cloud",
+      title: "SRE, Cloud & DevOps",
       icon: <Server className="w-8 h-8 text-blue-400" />,
       skills: [
-        { name: "Docker", level: 90, icon: <Container className="w-5 h-5" /> },
-        { name: "Kubernetes", level: 85, icon: <Layers className="w-5 h-5" /> },
-        { name: "GitLab CI/CD", level: 88, icon: <GitBranch className="w-5 h-5" /> },
-        { name: "Prometheus", level: 80, icon: <Activity className="w-5 h-5" /> },
-        { name: "Grafana", level: 85, icon: <Monitor className="w-5 h-5" /> }
+        { name: "AWS", level: 82, icon: <Cloud className="w-5 h-5" /> },
+        { name: "Kubernetes", level: 88, icon: <Layers className="w-5 h-5" /> },
+        { name: "Docker", level: 92, icon: <Container className="w-5 h-5" /> },
+        { name: "GitHub Actions", level: 88, icon: <GitBranch className="w-5 h-5" /> },
+        { name: "Terraform", level: 72, icon: <Cloud className="w-5 h-5" /> }
+      ]
+    },
+    {
+      title: "GitOps & Observability",
+      icon: <Activity className="w-8 h-8 text-cyan-300" />,
+      skills: [
+        { name: "Argo CD (GitOps)", level: 84, icon: <GitBranch className="w-5 h-5" /> },
+        { name: "Prometheus", level: 82, icon: <Activity className="w-5 h-5" /> },
+        { name: "Grafana", level: 86, icon: <Monitor className="w-5 h-5" /> },
+        { name: "Helm", level: 76, icon: <Settings className="w-5 h-5" /> },
+        { name: "Shell Scripting", level: 85, icon: <Terminal className="w-5 h-5" /> }
+      ]
+    },
+    {
+      title: "Full-Stack Development",
+      icon: <Code className="w-8 h-8 text-purple-400" />,
+      skills: [
+        { name: "TypeScript", level: 86, icon: <FileCode className="w-5 h-5" /> },
+        { name: "JavaScript", level: 88, icon: <Globe className="w-5 h-5" /> },
+        { name: "Angular", level: 80, icon: <Box className="w-5 h-5" /> },
+        { name: "NestJS / Node.js", level: 80, icon: <Terminal className="w-5 h-5" /> },
+        { name: "PostgreSQL", level: 82, icon: <HardDrive className="w-5 h-5" /> }
       ]
     },
     {
@@ -43,42 +65,31 @@ const Skills = () => {
       skills: [
         { name: "Python", level: 95, icon: <Code className="w-5 h-5" /> },
         { name: "PySpark", level: 80, icon: <Zap className="w-5 h-5" /> },
-        { name: "ETL Pipelines", level: 85, icon: <Network className="w-5 h-5" /> },
-        { name: "InfluxDB", level: 75, icon: <Database className="w-5 h-5" /> },
-        { name: "PostgreSQL", level: 82, icon: <HardDrive className="w-5 h-5" /> }
+        { name: "ETL Pipelines", level: 86, icon: <Network className="w-5 h-5" /> },
+        { name: "Apache Airflow", level: 78, icon: <Network className="w-5 h-5" /> },
+        { name: "Statistical Analysis", level: 80, icon: <Activity className="w-5 h-5" /> }
       ]
     },
     {
-      title: "Development",
-      icon: <Code className="w-8 h-8 text-purple-400" />,
+      title: "Security & SOC",
+      icon: <Shield className="w-8 h-8 text-emerald-400" />,
       skills: [
-        { name: "JavaScript", level: 88, icon: <Globe className="w-5 h-5" /> },
-        { name: "TypeScript", level: 85, icon: <FileCode className="w-5 h-5" /> },
-        { name: "Node.js", level: 80, icon: <Terminal className="w-5 h-5" /> },
-        { name: "Angular", level: 75, icon: <Box className="w-5 h-5" /> },
-        { name: "NestJS", level: 78, icon: <Code className="w-5 h-5" /> }
+        { name: "Wazuh", level: 86, icon: <Shield className="w-5 h-5" /> },
+        { name: "YARA / Osquery", level: 80, icon: <FileCode className="w-5 h-5" /> },
+        { name: "SCA", level: 76, icon: <Shield className="w-5 h-5" /> },
+        { name: "Threat Detection", level: 80, icon: <Activity className="w-5 h-5" /> },
+        { name: "Incident Response", level: 78, icon: <Zap className="w-5 h-5" /> }
       ]
     },
     {
-      title: "Tools & Technologies",
-      icon: <Settings className="w-8 h-8 text-orange-400" />,
+      title: "Automation & QA",
+      icon: <Monitor className="w-8 h-8 text-orange-400" />,
       skills: [
-        { name: "Git", level: 90, icon: <GitBranch className="w-5 h-5" /> },
-        { name: "Terraform", level: 70, icon: <Cloud className="w-5 h-5" /> },
-        { name: "Ansible", level: 75, icon: <Settings className="w-5 h-5" /> },
-        { name: "Airflow", level: 72, icon: <Network className="w-5 h-5" /> },
-        { name: "Shell Scripting", level: 85, icon: <Terminal className="w-5 h-5" /> }
-      ]
-    },
-    {
-      title: "SOC & Security",
-      icon: <Shield className="w-8 h-8 text-cyan-300" />,
-      skills: [
-        { name: "Wazuh", level: 82, icon: <Shield className="w-5 h-5" /> },
-        { name: "SIEM Monitoring", level: 80, icon: <Monitor className="w-5 h-5" /> },
-        { name: "Threat Detection", level: 78, icon: <Activity className="w-5 h-5" /> },
-        { name: "Incident Response", level: 76, icon: <Zap className="w-5 h-5" /> },
-        { name: "Vulnerability Triage", level: 74, icon: <FileCode className="w-5 h-5" /> }
+        { name: "Appium", level: 88, icon: <Cpu className="w-5 h-5" /> },
+        { name: "Playwright", level: 84, icon: <Monitor className="w-5 h-5" /> },
+        { name: "Selenium", level: 80, icon: <Monitor className="w-5 h-5" /> },
+        { name: "iOS / Android Testing", level: 82, icon: <Box className="w-5 h-5" /> },
+        { name: "Integration & Unit Testing", level: 82, icon: <Shield className="w-5 h-5" /> }
       ]
     }
   ];
@@ -112,12 +123,13 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, categoryIndex) => (
             <div
               key={categoryIndex}
-              className="glow-card rounded-lg p-6 animate-fade-in-up"
-              style={{ animationDelay: `${categoryIndex * 100}ms` }}
+              data-tilt
+              className="glow-card modern-panel rounded-xl p-6 animate-fade-in-up"
+              style={{ transitionDelay: `${categoryIndex * 80}ms` }}
             >
               <div className="flex items-center mb-6">
                 <div className="mr-3">
@@ -163,6 +175,18 @@ const Skills = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
             {[
+              { name: 'AWS', icon: <Cloud className="w-4 h-4" /> },
+              { name: 'Argo CD', icon: <GitBranch className="w-4 h-4" /> },
+              { name: 'GitOps', icon: <GitBranch className="w-4 h-4" /> },
+              { name: 'GitHub Actions', icon: <GitBranch className="w-4 h-4" /> },
+              { name: 'Osquery', icon: <FileCode className="w-4 h-4" /> },
+              { name: 'SCA', icon: <Shield className="w-4 h-4" /> },
+              { name: 'File Integrity Monitoring', icon: <Shield className="w-4 h-4" /> },
+              { name: 'Statistical Data Analysis', icon: <Activity className="w-4 h-4" /> },
+              { name: 'Integration Testing', icon: <Shield className="w-4 h-4" /> },
+              { name: 'Unit Testing', icon: <Shield className="w-4 h-4" /> },
+              { name: 'Visual Testing', icon: <Monitor className="w-4 h-4" /> },
+              { name: 'Android Studio', icon: <Box className="w-4 h-4" /> },
               { name: 'Airflow', icon: <Network className="w-4 h-4" /> },
               { name: 'Appium', icon: <Cpu className="w-4 h-4" /> },
               { name: 'Playwright', icon: <Monitor className="w-4 h-4" /> },

@@ -70,6 +70,16 @@ const Projects = () => {
       'SSH Brute Force Detection': <Shield className="w-3 h-3" />,
       'Suricata': <Network className="w-3 h-3" />,
       'Auditd': <Activity className="w-3 h-3" />,
+      'auditd': <Activity className="w-3 h-3" />,
+      'Osquery': <FileCode className="w-3 h-3" />,
+      'File Integrity Monitoring': <Shield className="w-3 h-3" />,
+      'Slack Alerting': <Zap className="w-3 h-3" />,
+      'ILM Policies': <Settings className="w-3 h-3" />,
+      'S3 Snapshots': <Cloud className="w-3 h-3" />,
+      'Wazuh Dashboard': <Monitor className="w-3 h-3" />,
+      'Argo CD': <GitBranch className="w-3 h-3" />,
+      'GitOps': <GitBranch className="w-3 h-3" />,
+      'AWS': <Cloud className="w-3 h-3" />,
       'Custom Rules': <Settings className="w-3 h-3" />,
       'Custom Decoders': <FileCode className="w-3 h-3" />
     };
@@ -79,9 +89,9 @@ const Projects = () => {
 
   const achievements = [
     {
-      title: "SOC XDR Implementation with Wazuh",
-      description: "Implemented an XDR-level SOC capability using Wazuh with centralized log ingestion, real-time correlation rules, and alert triage workflows. Added YARA-based malware detection, active response for SSH brute-force attacks, Suricata integration for network security events, and Auditd-based system event collection. Built customized Wazuh rules and decoders to improve detection coverage and response speed.",
-      technologies: ["Wazuh", "SOC Monitoring", "XDR", "SIEM", "YARA", "Active Response", "SSH Brute Force Detection", "Suricata", "Auditd", "Custom Rules", "Custom Decoders", "Threat Detection", "Incident Response"],
+      title: "End-to-End Wazuh SOC & Incident Response Platform",
+      description: "Designed and implemented a complete Wazuh-based security monitoring and incident-response platform. Integrated YARA for custom-rule malware detection, File Integrity Monitoring (FIM) for unauthorized-change detection, and auditd/auditctl for privileged-command auditing and user attribution. Added Osquery for SQL-based endpoint telemetry and automated Active Response to enforce firewall-drop actions against malicious sources. Wired Slack notifications for real-time alerting, established ILM retention policies and S3 snapshot backups for DR, and centralized detection, correlation, and investigation through the Wazuh Dashboard — turning raw telemetry into actionable insight and faster response.",
+      technologies: ["Wazuh", "YARA", "File Integrity Monitoring", "auditd", "Osquery", "Active Response", "Slack Alerting", "ILM Policies", "S3 Snapshots", "Wazuh Dashboard", "Threat Detection", "Incident Response"],
       icon: <Shield className="w-8 h-8 text-cyan-300" />,
       gradient: "from-cyan-500/20 to-blue-500/20"
     },
@@ -100,9 +110,9 @@ const Projects = () => {
       gradient: "from-purple-500/20 to-pink-500/20"
     },
     {
-      title: "Alpha Vault Infrastructure Rebuilding",
-      description: "Orchestrated complete vault infrastructure rebuilding using Kubernetes with automated deployment pipelines. Resolved critical vault issues, implemented comprehensive service automation, and achieved 100% smoke test pass rate ensuring robust and reliable vault operations.",
-      technologies: ["Kubernetes", "Docker", "Helm", "CI/CD", "Vault", "Infrastructure as Code", "Service Mesh", "Monitoring", "Automated Testing", "DevOps"],
+      title: "Alpha Vault Infrastructure Rebuild (GitOps)",
+      description: "Orchestrated a complete vault infrastructure rebuild on Kubernetes with GitOps delivery via Argo CD and automated CI/CD. Resolved critical vault issues, implemented comprehensive service automation on AWS, and achieved a 100% smoke-test pass rate ensuring robust, reliable, and fully auditable operations.",
+      technologies: ["Kubernetes", "Argo CD", "GitOps", "AWS", "Docker", "Helm", "CI/CD", "Vault", "Infrastructure as Code", "Monitoring"],
       icon: <Shield className="w-8 h-8 text-orange-400" />,
       gradient: "from-orange-500/20 to-red-500/20"
     },
@@ -123,7 +133,7 @@ const Projects = () => {
             Key <span className="gradient-text">Achievements</span>
           </h2>
           <p className="text-gray-300 dark:text-gray-700 max-w-2xl mx-auto">
-            Showcasing key projects that demonstrate my expertise in Site Reliability Engineering, Security Engineering, and Data Engineering
+            Flagship projects spanning SRE & GitOps, security/SOC engineering, data pipelines, and cross-platform automation
           </p>
         </div>
 
@@ -132,8 +142,9 @@ const Projects = () => {
           {achievements.map((achievement, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden glow-card modern-panel card-sheen rounded-xl transition-all duration-300 animate-fade-in-up hover:-translate-y-1"
-              style={{ animationDelay: `${index * 200}ms` }}
+              data-tilt
+              className="group relative overflow-hidden glow-card modern-panel card-sheen rounded-xl transition-all duration-300 animate-fade-in-up"
+              style={{ transitionDelay: `${index * 120}ms` }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${achievement.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
               

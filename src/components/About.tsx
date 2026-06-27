@@ -1,33 +1,40 @@
 import React from 'react';
-import { Code, Database, Zap, Users } from 'lucide-react';
+import { Server, GitBranch, Code, Database, ShieldCheck } from 'lucide-react';
 
 const About = () => {
   const coreFocus = [
     'SRE & Platform Reliability',
-    'Security Engineering (SOC/XDR)',
-    'Data Engineering & ETL'
+    'DevOps & GitOps',
+    'Full-Stack Development',
+    'Data Engineering & ETL',
+    'Security & SOC'
   ];
 
   const highlights = [
     {
-      icon: <Code className="w-6 h-6 md:w-8 md:h-8 text-blue-400 dark:text-blue-500" />,
+      icon: <Server className="w-6 h-6 md:w-8 md:h-8 text-blue-400 dark:text-blue-500" />,
       title: "Site Reliability Engineering",
-      description: "Expert in CI/CD pipelines, containerization, and cloud infrastructure automation"
+      description: "Keeping production resilient with Kubernetes, AWS, and end-to-end observability via Prometheus & Grafana"
+    },
+    {
+      icon: <GitBranch className="w-6 h-6 md:w-8 md:h-8 text-cyan-400 dark:text-cyan-500" />,
+      title: "DevOps & GitOps",
+      description: "Automated delivery with GitHub Actions and declarative GitOps deployments using Argo CD on Kubernetes"
+    },
+    {
+      icon: <Code className="w-6 h-6 md:w-8 md:h-8 text-purple-400 dark:text-purple-500" />,
+      title: "Full-Stack & Automation",
+      description: "Building full-stack apps (Angular, NestJS, PostgreSQL) and cross-platform test automation with Appium & Playwright"
     },
     {
       icon: <Database className="w-6 h-6 md:w-8 md:h-8 text-teal-400 dark:text-teal-500" />,
       title: "Data Engineering",
-      description: "Specialized in building robust ETL pipelines and real-time data processing systems"
+      description: "Robust ETL pipelines and predictive, time-series analytics for capacity planning and decision-making"
     },
     {
-      icon: <Zap className="w-6 h-6 md:w-8 md:h-8 text-yellow-400 dark:text-yellow-500" />,
-      title: "Security Engineering",
-      description: "Hands-on SOC and detection engineering with Wazuh, rule tuning, and incident response automation"
-    },
-    {
-      icon: <Users className="w-6 h-6 md:w-8 md:h-8 text-purple-400 dark:text-purple-500" />,
-      title: "Team Leadership",
-      description: "Strong collaboration skills and experience in cross-functional team environments"
+      icon: <ShieldCheck className="w-6 h-6 md:w-8 md:h-8 text-emerald-400 dark:text-emerald-500" />,
+      title: "Security & SOC",
+      description: "Detection engineering with Wazuh — YARA, FIM, auditd, Osquery and automated active response"
     }
   ];
 
@@ -40,7 +47,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-gray-300 dark:text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            A Site Reliability Engineer focused on security and data engineering, with expertise in scalable infrastructure, detection engineering, and production reliability.
+            A Site Reliability Engineer with a full-stack edge — spanning DevOps & GitOps, data engineering, automation testing, and security/SOC — focused on shipping resilient platforms end to end.
           </p>
         </div>
 
@@ -49,12 +56,14 @@ const About = () => {
           <div className="space-y-6">
             <div className="space-y-6">
               <p className="text-base md:text-lg text-gray-200 dark:text-gray-700 leading-relaxed">
-                I am a Site Reliability Engineer with strong security and data engineering experience in scalable infrastructure, 
-                automated delivery workflows, and real-time observability with Prometheus and Grafana.
+                I am a Site Reliability Engineer at Finstein who started as a developer and tester and grew into owning
+                platform reliability — building automated delivery with GitHub Actions and GitOps via Argo CD,
+                plus real-time observability with Prometheus and Grafana on Kubernetes and AWS.
               </p>
               <p className="text-base md:text-lg text-gray-200 dark:text-gray-700 leading-relaxed">
-                Proficient in Kubernetes, CI/CD, SOC tooling, and robust ETL pipelines. Skilled at transforming complex 
-                data and security telemetry into actionable insights while delivering resilient end-to-end platform solutions.
+                That journey gives me range: full-stack development (Angular, NestJS, PostgreSQL), cross-platform test
+                automation (Appium, Playwright), robust ETL pipelines, and a Wazuh-based SOC for threat detection and
+                response. I turn complex data and security telemetry into actionable, resilient end-to-end solutions.
               </p>
             </div>
 
@@ -87,7 +96,8 @@ const About = () => {
               {highlights.map((item, index) => (
                 <div
                   key={index}
-                  className="glow-card modern-panel card-sheen p-4 md:p-5 rounded-xl transition-all duration-300 hover:-translate-y-1 group"
+                  data-tilt
+                  className="glow-card modern-panel card-sheen p-4 md:p-5 rounded-xl transition-all duration-300 group"
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
