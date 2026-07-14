@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import Logo from './Logo';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,12 +60,8 @@ const Header = () => {
               className="flex items-center gap-3 group transition-all duration-300 hover:scale-105"
             >
               <div className="relative">
-                <img 
-                  src="/images/logo.png" 
-                  alt="Pravin Abdul Kalam M - Logo"
-                  className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-all duration-300 group-hover:drop-shadow-2xl relative z-10"
-                />
-                <div className="absolute inset-0 bg-blue-500/20 dark:bg-gray-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                <Logo className="h-11 sm:h-12 md:h-14 w-auto transition-all duration-300 group-hover:drop-shadow-2xl group-hover:scale-105 relative z-10" />
+                <div className="absolute inset-0 bg-blue-500/25 dark:bg-blue-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </div>
               <div className="hidden sm:block text-left">
                 <h1 className={`text-lg md:text-xl font-bold leading-tight group-hover:text-cyan-300 dark:group-hover:text-gray-700 transition-colors duration-300 ${brandTitleClass}`}>
@@ -72,7 +69,7 @@ const Header = () => {
                 </h1>
                 <div className="flex items-center gap-2">
                   <p className={`text-[10px] md:text-xs leading-tight max-w-[15rem] md:max-w-none font-semibold group-hover:text-cyan-200 dark:group-hover:text-slate-600 transition-colors duration-300 ${brandSubtitleClass}`}>
-                    Site Reliability Engineer (SRE) | Security & Data Engineering
+                    SRE · DevOps &amp; GitOps · Full-Stack · Security &amp; SOC
                   </p>
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" title="Available for opportunities"></div>
                 </div>

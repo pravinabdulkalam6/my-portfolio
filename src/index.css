@@ -573,12 +573,66 @@
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
-  
+
   .shadow-glow {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
-  
+
   .shadow-glow-teal {
     box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+  }
+}
+
+/* Slow drifting aurora blobs for the hero backdrop */
+@keyframes aurora {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(40px, -30px, 0) scale(1.12); }
+  66% { transform: translate3d(-30px, 20px, 0) scale(0.92); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.animate-aurora {
+  animation: aurora 16s ease-in-out infinite;
+}
+
+/* Tilt cards keep their lift/glow but let the JS-driven 3D transform win */
+[data-tilt] {
+  transform-style: preserve-3d;
+}
+
+/* Hero entrance: a clean fade so first paint never sits at opacity 0 */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Animated underline used under section eyebrows */
+.section-eyebrow {
+  position: relative;
+  display: inline-block;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-scale-in,
+  .animate-rotate-in {
+    opacity: 1;
+    transform: none;
   }
 }

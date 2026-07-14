@@ -4,16 +4,18 @@ import { Calendar, MapPin, Building } from 'lucide-react';
 const Experience = () => {
   const experiences = [
     {
-      title: "Site Reliability Engineer (SRE) | Security & Data Engineering",
+      title: "Site Reliability Engineer | DevOps, GitOps & SOC",
       company: "Finstein Advisory Service LLP",
       location: "Chennai, India",
       period: "May 2023 - Present",
       description: [
-        "Designed and deployed containerized applications using Docker and orchestrated them with a scalable Kubernetes cluster",
-        "Implemented CI/CD pipelines using GitHub Actions, automating build, test, and deployment processes",
-        "Developed predictive capacity planning ETL pipeline using ARIMA, SARIMAX, and ETS models for accurate CPU forecasting and automated resource allocation",
-        "Orchestrated Alpha Vault infrastructure rebuilding with Kubernetes automation, resolving critical issues and achieving 100% smoke test pass rate"
+        "Containerized applications with Docker and operated a scalable Kubernetes cluster on AWS for production workloads",
+        "Built CI/CD with GitHub Actions and declarative GitOps delivery using Argo CD for automated, auditable deployments",
+        "Engineered an end-to-end Wazuh SOC platform (YARA, FIM, auditd, Osquery, active response) for threat detection and incident response",
+        "Developed a predictive capacity-planning ETL pipeline using ARIMA, SARIMAX, and ETS for CPU forecasting and automated resource allocation",
+        "Rebuilt Alpha Vault infrastructure with Kubernetes automation, resolving critical issues and achieving a 100% smoke-test pass rate"
       ],
+      tags: ["Kubernetes", "AWS", "Argo CD", "GitHub Actions", "Wazuh", "Prometheus", "Grafana", "Go", "ETL"],
       current: true
     },
     {
@@ -22,35 +24,38 @@ const Experience = () => {
       location: "Chennai, India",
       period: "Nov 2022 - Apr 2023",
       description: [
-        "Implemented comprehensive developer productivity monitoring system by integrating GitLab's REST API with InfluxDB and Grafana",
-        "Developed Python automation scripts to extract, transform, and load developer activity data from GitLab into time-series databases",
-        "Created custom Grafana dashboards displaying team and individual developer productivity metrics"
+        "Built a developer-productivity monitoring system by integrating GitLab's REST API with InfluxDB and Grafana",
+        "Wrote Python ETL automation to extract, transform, and load developer activity data into time-series databases",
+        "Created custom Grafana dashboards surfacing team and individual productivity metrics, improving transparency by 25%"
       ],
+      tags: ["Python", "PySpark", "Apache Airflow", "InfluxDB", "Grafana", "PostgreSQL"],
       current: false
     },
     {
-      title: "Automation Testing Engineer - Intern",
+      title: "Automation Test Engineer",
       company: "Finstein Advisory Service LLP",
       location: "Chennai, India",
       period: "Mar 2022 - Oct 2022",
       description: [
-        "Architected cross-platform bilingual automation testing framework using Appium for Android/iOS with English/Arabic support, featuring RTL text validation and dynamic UI element detection",
-        "Developed and implemented a cross-platform automation testing framework using Appium for both iOS and Android applications",
-        "Utilized a JSON-based approach to manage and externalize test data, improving reusability and scalability of test cases",
-        "Used Xcode and Appium Inspector for element identification and UI inspection on iOS and Android applications"
+        "Architected a cross-platform bilingual (English/Arabic) automation framework with Appium for Android/iOS, including RTL validation and dynamic element detection",
+        "Extended coverage with Playwright and Selenium for web and visual regression testing across the stack",
+        "Externalized test data with a JSON-based approach, improving reusability and scalability of test cases",
+        "Used Xcode, Android Studio, and Appium Inspector for element identification and UI inspection"
       ],
+      tags: ["Appium", "Playwright", "Selenium", "iOS Testing", "Android Studio", "Visual Testing"],
       current: false
     },
     {
-      title: "Software Developer - Intern",
+      title: "Full-Stack Developer",
       company: "Finstein Advisory Service LLP",
       location: "Chennai, India",
       period: "May 2021 - Feb 2022",
       description: [
         "Developed and integrated a Campaign Management module into an existing application ecosystem",
-        "Built user interfaces and workflows for the admin dashboard, enabling users to create, schedule, and automate campaign deliveries using cron jobs",
-        "Integrated the campaign module within the Ionic mobile app to receive and display push notifications"
+        "Built admin-dashboard UIs and workflows (Angular) to create, schedule, and automate campaign deliveries via cron jobs",
+        "Integrated the campaign module within an Ionic mobile app to receive and display push notifications"
       ],
+      tags: ["Angular", "NestJS", "Node.js", "PostgreSQL", "Ionic", "TypeScript"],
       current: false
     }
   ];
@@ -87,7 +92,7 @@ const Experience = () => {
                 <div className={`ml-12 md:ml-0 ${
                   index % 2 === 0 ? 'md:mr-1/2 md:pr-12' : 'md:ml-1/2 md:pl-12'
                 }`}>
-                  <div className="glow-card modern-panel card-sheen rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                  <div data-tilt className="glow-card modern-panel card-sheen rounded-xl p-6 transition-all duration-300 group">
                     {exp.current && (
                       <span className="inline-block px-3 py-1 bg-cyan-400/20 dark:bg-gray-800/30 text-cyan-300 dark:text-gray-800 text-xs font-medium rounded-full mb-3">
                         Current Position
@@ -121,6 +126,17 @@ const Experience = () => {
                         </li>
                       ))}
                     </ul>
+
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-700/50 dark:border-blue-200/60">
+                      {exp.tags.map((tag, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="px-2.5 py-1 text-[11px] font-medium rounded-full bg-cyan-400/10 dark:bg-blue-50 border border-cyan-400/25 dark:border-blue-200 text-cyan-200 dark:text-blue-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

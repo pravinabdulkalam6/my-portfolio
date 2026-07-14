@@ -2,29 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { ChevronDown, Download, MapPin, Mail, Phone, Sparkles, Code, Database } from 'lucide-react';
 import ProfileImage from './ProfileImage';
 
+const roles = [
+  'Site Reliability Engineer',
+  'Full-Stack & Data Engineer',
+  'DevOps, GitOps & Observability',
+  'Automation Test Engineer · Appium & Playwright',
+  'Security & SOC Analyst',
+];
+
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
-  const fullText = 'Site Reliability Engineer (SRE) | Security & Data Engineering';
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
   const topHighlights = [
-    'SOC/XDR implementation with Wazuh',
-    'Cross-platform automation testing (Appium iOS/Android)',
-    'Predictive ETL pipeline for capacity planning',
-    'Kubernetes platform with CI/CD automation'
+    'End-to-end Wazuh SOC — YARA, FIM, auditd & Osquery',
+    'GitOps delivery with Argo CD on Kubernetes',
+    'Cross-platform automation: Appium & Playwright',
+    'Predictive ETL for capacity planning (ARIMA/SARIMAX)'
   ];
 
+  // Looping typewriter that cycles through the roles above.
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 100);
+    const current = roles[roleIndex];
+    let timeout: ReturnType<typeof setTimeout>;
 
-    return () => clearInterval(timer);
-  }, []);
+    if (!deleting && typedText === current) {
+      timeout = setTimeout(() => setDeleting(true), 1800);
+    } else if (deleting && typedText === '') {
+      setDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else {
+      timeout = setTimeout(() => {
+        setTypedText((prev) =>
+          deleting
+            ? current.slice(0, prev.length - 1)
+            : current.slice(0, prev.length + 1)
+        );
+      }, deleting ? 35 : 75);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [typedText, deleting, roleIndex]);
 
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
@@ -38,9 +56,9 @@ const Hero = () => {
     <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950/70 dark:from-[#f7fbff] dark:via-[#eef7ff] dark:to-[#dcecff]">
       {/* Enhanced Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/8 dark:bg-blue-400/18 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-500/8 dark:bg-cyan-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/8 dark:bg-indigo-300/18 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/8 dark:bg-blue-400/18 rounded-full blur-3xl animate-aurora"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-500/8 dark:bg-cyan-300/20 rounded-full blur-3xl animate-aurora" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/8 dark:bg-indigo-300/18 rounded-full blur-3xl animate-aurora" style={{ animationDelay: '8s' }}></div>
       </div>
 
       {/* Floating Particles */}
@@ -71,8 +89,9 @@ const Hero = () => {
           <div className="lg:w-1/2 text-center lg:text-left animate-fade-in-up">
             <div className="mb-8">
               <div className="mb-4">
-                <span className="inline-block px-3 sm:px-4 py-2 bg-cyan-400/10 dark:bg-white/70 border border-cyan-400/30 dark:border-blue-200 rounded-full text-cyan-300 dark:text-blue-700 text-xs sm:text-sm leading-tight font-medium mb-4 animate-scale-in shadow-sm">
-                  Site Reliability Engineer (SRE) | Security & Data Engineering
+                <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-cyan-400/10 dark:bg-white/70 border border-cyan-400/30 dark:border-blue-200 rounded-full text-cyan-300 dark:text-blue-700 text-xs sm:text-sm leading-tight font-medium mb-4 animate-scale-in shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Available for opportunities · Chennai, India
                 </span>
               </div>
               
@@ -90,8 +109,10 @@ const Hero = () => {
               </h2>
               
               <p className="text-lg text-gray-400 dark:text-slate-700 max-w-2xl leading-relaxed space-y-2">
-                Passionate about designing <span className="text-blue-400 dark:text-blue-700 font-semibold">scalable infrastructure</span>, 
-                automating deployment workflows, and implementing <span className="text-teal-400 dark:text-cyan-700 font-semibold">real-time monitoring systems</span>{' '}using cutting-edge technologies.
+                I build and operate <span className="text-blue-400 dark:text-blue-700 font-semibold">reliable, scalable platforms</span> — from{' '}
+                <span className="text-teal-400 dark:text-cyan-700 font-semibold">GitOps delivery</span> and real-time observability to{' '}
+                <span className="text-purple-400 dark:text-indigo-700 font-semibold">full-stack apps, data pipelines</span> and{' '}
+                <span className="text-cyan-300 dark:text-blue-700 font-semibold">SOC security engineering</span>.
               </p>
             </div>
 
@@ -139,7 +160,8 @@ const Hero = () => {
                 {topHighlights.map((item, index) => (
                   <div
                     key={index}
-                    className="px-4 py-3 rounded-xl bg-slate-900/55 dark:bg-white/85 border border-slate-700/60 dark:border-blue-200 text-xs sm:text-sm text-slate-200 dark:text-slate-700 font-medium leading-relaxed"
+                    data-tilt
+                    className="px-4 py-3 rounded-xl bg-slate-900/55 dark:bg-white/85 border border-slate-700/60 dark:border-blue-200 text-xs sm:text-sm text-slate-200 dark:text-slate-700 font-medium leading-relaxed hover:border-cyan-300/60 dark:hover:border-blue-400/60 transition-colors duration-300"
                   >
                     {item}
                   </div>
@@ -156,7 +178,7 @@ const Hero = () => {
                 {/* Profile Image */}
                 <ProfileImage 
                   src="/images/profile.jpeg"
-                  alt="Pravin Abdul Kalam M - Site Reliability Engineer (SRE) | Security & Data Engineering"
+                  alt="Pravin Abdul Kalam M - SRE, Full-Stack & Data Engineer, Security & SOC Analyst"
                   fallbackText="PAK"
                 />
               </div>
